@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <title>Diverse Biljartsystemen – Johan Sopamena</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Overzicht van diverse biljartsystemen voor driebanden, beheerd door Johan Sopamena." />
+  <style>
+    :root {
+      --bg: #05060a;
+      --bg-alt: #101320;
+      --panel: #151927;
+      --panel-soft: #191d2c;
+      --border: #252a3b;
+      --accent: #4da3ff;
+      --accent-soft: rgba(77,163,255,0.15);
+      --accent-strong: #63b2ff;
+      --text: #f5f6ff;
+      --muted: #a4a9c4;
+      --danger: #ff4d7a;
+      --success: #3bd68c;
+      --radius-lg: 14px;
+      --radius-md: 10px;
+      --radius-pill: 999px;
+      --shadow: 0 18px 45px rgba(0,0,0,0.55);
+      --transition-fast: 0.18s ease-out;
+      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-main);
+      background: radial-gradient(circle at top, #182038 0, #05060a 48%, #020309 100%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .page { max-width: 1180px; margin: 0 auto; padding: 20px 16px 40px; }
+
+    /* HEADER */
+    .site-header {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 10px 10px 18px;
+      position: sticky; top: 0; z-index: 20;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(to bottom, rgba(5,6,10,0.94), rgba(5,6,10,0.76), rgba(5,6,10,0));
+    }
+
+    .logo { display: flex; align-items: center; gap: 12px; }
+    .logo-mark {
+      width: 38px; height: 38px; border-radius: 12px;
+      background: radial-gradient(circle at 30% 20%, #4da3ff 0, #20253a 52%, #05060a 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 18px; color: #ffffff;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.04);
+    }
+    .logo-text-main { font-size: 18px; font-weight: 700; letter-spacing: 0.03em; }
+    .logo-text-sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--muted); }
+
+    .nav-links { display: flex; gap: 16px; font-size: 13px; color: var(--muted); }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ADMIN BADGE */
+    .admin-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 9px; border-radius: var(--radius-pill);
+      border: 1px solid var(--accent); background: var(--accent-soft);
+      color: var(--accent-strong); font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em;
+    }
+    .admin-dot { width: 7px; height: 7px; border-radius: 999px; background: var(--success); box-shadow: 0 0 0 4px rgba(59,214,140,0.18); }
+
+    /* HERO */
+    .hero {
+      margin-top: 4px; margin-bottom: 24px;
+      display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.2fr); gap: 20px;
+    }
+    .hero-left {
+      padding: 18px; border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top left, rgba(77,163,255,0.16), #111524);
+      border: 1px solid rgba(100,130,200,0.42); box-shadow: var(--shadow);
+    }
+    .hero-kicker { font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--muted); margin-bottom: 4px; }
+    .hero-title { font-size: 26px; font-weight: 750; margin-bottom: 6px; }
+    .hero-subtitle { font-size: 14px; color: var(--muted); max-width: 540px; margin-bottom: 16px; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 10px; font-size: 12px; color: var(--muted); }
+    .meta-pill { padding: 4px 9px; border-radius: var(--radius-pill); border: 1px solid var(--border); background: #050712; }
+
+    .hero-right {
+      padding: 14px 14px 16px; border-radius: var(--radius-lg);
+      background: rgba(10,12,19,0.96); border: 1px solid var(--border);
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .admin-block-title { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+    .admin-name { font-size: 15px; font-weight: 600; }
+    .admin-role { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+    .admin-info { font-size: 12px; color: var(--muted); }
+
+    /* FILTER BAR */
+    .controls {
+      margin-bottom: 22px;
+      display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+      padding: 12px 14px; background: rgba(10,13,21,0.96);
+      border-radius: var(--radius-lg); border: 1px solid var(--border);
+    }
+    .filter-group { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+    .filter-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--muted); margin-right: 4px; }
+    .pill {
+      padding: 6px 11px; border-radius: var(--radius-pill); border: 1px solid var(--border);
+      background: #050712; color: var(--muted); font-size: 12px; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 6px; transition: var(--transition-fast);
+    }
+    .pill.active { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
+    .pill-dot { width: 7px; height: 7px; border-radius: 100px; background: var(--accent); }
+    .controls-right { margin-left: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+    .tool-count { font-size: 12px; color: var(--muted); }
+
+    /* GRID */
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+
+    /* CARD + Absolute variant fix */
+    .card {
+      background: radial-gradient(circle at top left, rgba(77,163,255,0.16), #141827);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      padding: 14px 14px 12px;
+      box-shadow: var(--shadow);
+      display: flex; flex-direction: column; gap: 8px;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+
+      /* Absolute variant context + ruimte voor de knop */
+      position: relative;
+      min-height: 240px;
+      padding-bottom: 56px;
+    }
+    .card:hover { transform: translateY(-3px); border-color: rgba(77,163,255,0.7); box-shadow: 0 26px 60px rgba(0,0,0,0.7); }
+
+    .card-header { display: flex; gap: 10px; align-items: flex-start; }
+    .card-icon {
+      width: 32px; height: 32px; border-radius: 11px;
+      background: linear-gradient(135deg, #4da3ff, #7b5cff);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 16px; color: #fff; flex-shrink: 0;
+    }
+    .card-title-group { flex: 1; }
+    .card-title { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+    .card-subtitle { font-size: 12px; color: var(--muted); }
+    .card-badges { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 5px; }
+    .badge {
+      font-size: 10px; text-transform: uppercase; letter-spacing: 0.13em;
+      padding: 3px 7px; border-radius: var(--radius-pill); border: 1px solid var(--border); color: var(--muted);
+    }
+    .badge-free { border-color: var(--success); color: var(--success); background: rgba(59,214,140,0.08); }
+    .badge-3c { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+
+    .card-body { font-size: 13px; color: var(--muted); }
+
+    .card-footer {
+      display: flex; justify-content: flex-start; align-items: center; gap: 10px; margin-top: 4px;
+    }
+    .tags { display: flex; flex-wrap: wrap; gap: 4px; }
+    .tag {
+      font-size: 11px; padding: 3px 7px;
+      border-radius: var(--radius-pill); background: #050712; border: 1px solid var(--border); color: var(--muted);
+    }
+
+    .btn-detail {
+      padding: 6px 11px; border-radius: var(--radius-pill); border: none;
+      background: var(--accent); color: #050712; font-size: 12px; font-weight: 600;
+      cursor: pointer; white-space: nowrap; display: inline-flex; align-items: center; gap: 6px;
+      transition: var(--transition-fast);
+
+      /* Absolute variant: vaste plek rechtsonder in de kaart */
+      position: absolute; right: 16px; bottom: 16px; z-index: 1;
+    }
+    .btn-detail:hover { background: var(--accent-strong); transform: translateY(-1px); box-shadow: 0 0 0 2px rgba(77,163,255,0.35); }
+
+    /* FOOTER */
+    .site-footer {
+      margin-top: 26px; padding-top: 14px; border-top: 1px solid var(--border);
+      font-size: 11px; color: var(--muted); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px;
+    }
+
+    @media (max-width: 780px) {
+      .hero { grid-template-columns: minmax(0, 1fr); }
+      .hero-right { order: -1; }
+      .site-header { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 520px) {
+      .controls { flex-direction: column; align-items: flex-start; }
+      .controls-right { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- HEADER -->
+    <header class="site-header">
+      <div class="logo">
+        <div class="logo-mark">JS</div>
+        <div>
+          <div class="logo-text-main">Diverse Biljartsystemen</div>
+          <div class="logo-text-sub">Driebanden – systemen & referenties</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="#overzicht">Systemen</a>
+        <a href="#over-johan">Over Johan</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" id="overzicht">
+      <div class="hero-left">
+        <div class="hero-kicker">Overzicht</div>
+        <h1 class="hero-title">Overzicht van diverse biljartsystemen</h1>
+        <p class="hero-subtitle">
+          Een praktisch overzicht van systemen voor driebanden: van basis diamond tot contra‑effect,
+          samengesteld en beheerd door <strong>Johan Sopamena</strong>.
+        </p>
+        <div class="hero-meta">
+          <span class="meta-pill">Focustafel: Driebanden</span>
+          <span class="meta-pill">Niveau: Gevorderd &amp; topspelers</span>
+          <span class="meta-pill">Versie: Online referentie</span>
+        </div>
+      </div>
+      <aside class="hero-right" id="over-johan">
+        <span class="admin-badge">
+          <span class="admin-dot"></span>
+          Beheerder / Administrator
+        </span>
+        <div>
+          <div class="admin-name">Johan Sopamena</div>
+          <div class="admin-role">Beheerder &amp; samensteller biljartsystemen</div>
+          <p class="admin-info">
+            Johan Sopamena is de bedenker en samensteller van deze collectie biljartsystemen.
+            Op deze site beheert hij de systemen, voorbeelden en updates, zodat spelers één centrale
+            referentie hebben voor hun driebanden‑spel.
+          </p>
+        </div>
+      </aside>
+    </section>
+
+    <!-- FILTERBAR -->
+    <section class="controls">
+      <div class="filter-group">
+        <span class="filter-label">Filter systemen:</span>
+        <button class="pill active"><span class="pill-dot"></span>Alle systemen</button>
+        <button class="pill">Basis &amp; diamond</button>
+        <button class="pill">Snijbal &amp; KLK</button>
+        <button class="pill">Effect / contra</button>
+        <button class="pill">Zonder effect</button>
+      </div>
+      <div class="controls-right">
+        <span class="tool-count">50 systemen beschikbaar</span>
+      </div>
+    </section>
+
+    <!-- GRID MET SYSTEMEN -->
+    <main class="grid">
+
+      <!-- KAART 1 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H01</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 1 – Basis Diamond Systeem</h2>
+            <p class="card-subtitle">Universeel systeem voor driebanden met diamonds en formule R = V − A.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Basis</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Het systeem gebruikt vertrek, aankomst en richtpunt op de banden. Toepasbaar wanneer het vertrek hoger ligt dan het aankomstpunt.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk01</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-01.html">Bekijk hoofdstuk 1</a>
+        </div>
+      </article>
+
+      <!-- KAART 2 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H02</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 2 – Snijbal Kort–Lang–Kort</h2>
+            <p class="card-subtitle">Effecttelling voor snijbal via kort, lang, kort.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Snijbal</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Vertrek + richtpunt + aankomst bepalen het benodigde effect. Consistente afstanden zorgen voor reproduceerbare lijnen.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk02</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-02.html">Bekijk hoofdstuk 2</a>
+        </div>
+      </article>
+
+      <!-- KAART 3 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H03</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 3 – Zonder effect deel 02</h2>
+            <p class="card-subtitle">L–K–L‑patroon met richtpunt 30 en diamondcorrecties.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Positioneel</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Ligt vertrek tegenover aankomst, richt dan op 30. Corrigeer ±7,5 per diamondverschil om de lijn te stabiliseren.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk03</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-03.html">Bekijk hoofdstuk 3</a>
+        </div>
+      </article>
+
+      <!-- KAART 4 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H04</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 4 – Snijbal systeem met 2 en 3 effect deel 02</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 4.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Uitleg van referentielijnen, variaties en typische foutmarges met praktische voorbeelden op standaardtafels. dit wil ik nu gaan testen of alles nu goed werkt
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk04</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-04.html">Bekijk hoofdstuk 4</a>
+        </div>
+      </article>
+
+      <!-- KAART 5 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H05</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 5 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 5.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Focus op afrol, snelheid en contacthoek om toleranties te verkleinen en scoringskans te verhogen.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk05</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-05.html">Bekijk hoofdstuk 5</a>
+        </div>
+      </article>
+
+      <!-- KAART 6 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H06</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 6 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 6.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Richtlijnvarianten voor situaties met ingesloten tweede bal en beheer van afstootspin op korte band.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk06</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-06.html">Bekijk hoofdstuk 6</a>
+        </div>
+      </article>
+
+      <!-- KAART 7 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H07</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 7 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 7.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Looplijnen, referentie‑diamonds en microcorrecties bij variabele tafelrespons en balconditie.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk07</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-07.html">Bekijk hoofdstuk 7</a>
+        </div>
+      </article>
+
+      <!-- KAART 8 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H08</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 8 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 8.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Effectdosering en snelheidsmanagement voor stabiele lijnen over lang‑band scenario’s.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk08</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-08.html">Bekijk hoofdstuk 8</a>
+        </div>
+      </article>
+
+      <!-- KAART 9 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H09</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 9 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 9.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Referentie‑routes bij complexe posities en tabelafwijkingen met herstelcorrecties per tussenband.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk09</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-09.html">Bekijk hoofdstuk 9</a>
+        </div>
+      </article>
+
+      <!-- KAART 10 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H10</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 10 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 10.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Beheersing van eerste contacthoek en afrol om foutbanding bij derde band te minimaliseren.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk10</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-10.html">Bekijk hoofdstuk 10</a>
+        </div>
+      </article>
+
+      <!-- KAART 11 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H11</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 11 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 11.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 11 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk11</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-11.html">Bekijk hoofdstuk 11</a>
+        </div>
+      </article>
+
+      <!-- KAART 12 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H12</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 12 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 12.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 12 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk12</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-12.html">Bekijk hoofdstuk 12</a>
+        </div>
+      </article>
+
+      <!-- KAART 13 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H13</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 13 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 13.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 13 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk13</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-13.html">Bekijk hoofdstuk 13</a>
+        </div>
+      </article>
+
+      <!-- KAART 14 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H14</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 14 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 14.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 14 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk14</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-14.html">Bekijk hoofdstuk 14</a>
+        </div>
+      </article>
+
+      <!-- KAART 15 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H15</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 15 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 15.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 15 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk15</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-15.html">Bekijk hoofdstuk 15</a>
+        </div>
+      </article>
+
+      <!-- KAART 16 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H16</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 16 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 16.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 16 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk16</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-16.html">Bekijk hoofdstuk 16</a>
+        </div>
+      </article>
+
+      <!-- KAART 17 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H17</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 17 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 17.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 17 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk17</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-17.html">Bekijk hoofdstuk 17</a>
+        </div>
+      </article>
+
+      <!-- KAART 18 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H18</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 18 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 18.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 18 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk18</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-18.html">Bekijk hoofdstuk 18</a>
+        </div>
+      </article>
+
+      <!-- KAART 19 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H19</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 19 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 19.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 19 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk19</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-19.html">Bekijk hoofdstuk 19</a>
+        </div>
+      </article>
+
+      <!-- KAART 20 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H20</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 20 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 20.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 20 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk20</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-20.html">Bekijk hoofdstuk 20</a>
+        </div>
+      </article>
+
+      <!-- KAART 21 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H21</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 21 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 21.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 21 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk21</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-21.html">Bekijk hoofdstuk 21</a>
+        </div>
+      </article>
+
+      <!-- KAART 22 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H22</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 22 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 22.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 22 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk22</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-22.html">Bekijk hoofdstuk 22</a>
+        </div>
+      </article>
+
+      <!-- KAART 23 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H23</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 23 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 23.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 23 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk23</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-23.html">Bekijk hoofdstuk 23</a>
+        </div>
+      </article>
+
+      <!-- KAART 24 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H24</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 24 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 24.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 24 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk24</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-24.html">Bekijk hoofdstuk 24</a>
+        </div>
+      </article>
+
+      <!-- KAART 25 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H25</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 25 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 25.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 25 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk25</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-25.html">Bekijk hoofdstuk 25</a>
+        </div>
+      </article>
+
+      <!-- KAART 26 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H26</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 26 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 26.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 26 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk26</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-26.html">Bekijk hoofdstuk 26</a>
+        </div>
+      </article>
+
+      <!-- KAART 27 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H27</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 27 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 27.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 27 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk27</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-27.html">Bekijk hoofdstuk 27</a>
+        </div>
+      </article>
+
+      <!-- KAART 28 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H28</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 28 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 28.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 28 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk28</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-28.html">Bekijk hoofdstuk 28</a>
+        </div>
+      </article>
+
+      <!-- KAART 29 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H29</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 29 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 29.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 29 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk29</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-29.html">Bekijk hoofdstuk 29</a>
+        </div>
+      </article>
+
+      <!-- KAART 30 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H30</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 30 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 30.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 30 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk30</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-30.html">Bekijk hoofdstuk 30</a>
+        </div>
+      </article>
+
+      <!-- KAART 31 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H31</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 31 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 31.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 31 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk31</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-31.html">Bekijk hoofdstuk 31</a>
+        </div>
+      </article>
+
+      <!-- KAART 32 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H32</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 32 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 32.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 32 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk32</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-32.html">Bekijk hoofdstuk 32</a>
+        </div>
+      </article>
+
+      <!-- KAART 33 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H33</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 33 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 33.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 33 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk33</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-33.html">Bekijk hoofdstuk 33</a>
+        </div>
+      </article>
+
+      <!-- KAART 34 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H34</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 34 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 34.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 34 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk34</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-34.html">Bekijk hoofdstuk 34</a>
+        </div>
+      </article>
+
+      <!-- KAART 35 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H35</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 35 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 35.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 35 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk35</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-35.html">Bekijk hoofdstuk 35</a>
+        </div>
+      </article>
+
+      <!-- KAART 36 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H36</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 36 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 36.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 36 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk36</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-36.html">Bekijk hoofdstuk 36</a>
+        </div>
+      </article>
+
+      <!-- KAART 37 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H37</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 37 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 37.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 37 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk37</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-37.html">Bekijk hoofdstuk 37</a>
+        </div>
+      </article>
+
+      <!-- KAART 38 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H38</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 38 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 38.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 38 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk38</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-38.html">Bekijk hoofdstuk 38</a>
+        </div>
+      </article>
+
+      <!-- KAART 39 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H39</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 39 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 39.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 39 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk39</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-39.html">Bekijk hoofdstuk 39</a>
+        </div>
+      </article>
+
+      <!-- KAART 40 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H40</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 40 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 40.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 40 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk40</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-40.html">Bekijk hoofdstuk 40</a>
+        </div>
+      </article>
+
+      <!-- KAART 41 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H41</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 41 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 41.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 41 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk41</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-41.html">Bekijk hoofdstuk 41</a>
+        </div>
+      </article>
+
+      <!-- KAART 42 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H42</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 42 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 42.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 42 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk42</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-42.html">Bekijk hoofdstuk 42</a>
+        </div>
+      </article>
+
+      <!-- KAART 43 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H43</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 43 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 43.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 43 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk43</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-43.html">Bekijk hoofdstuk 43</a>
+        </div>
+      </article>
+
+      <!-- KAART 44 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H44</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 44 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 44.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 44 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk44</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-44.html">Bekijk hoofdstuk 44</a>
+        </div>
+      </article>
+
+      <!-- KAART 45 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H45</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 45 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 45.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 45 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk45</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-45.html">Bekijk hoofdstuk 45</a>
+        </div>
+      </article>
+
+      <!-- KAART 46 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H46</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 46 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 46.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 46 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk46</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-46.html">Bekijk hoofdstuk 46</a>
+        </div>
+      </article>
+
+      <!-- KAART 47 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H47</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 47 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 47.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 47 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk47</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-47.html">Bekijk hoofdstuk 47</a>
+        </div>
+      </article>
+
+      <!-- KAART 48 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H48</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 48 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 48.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 48 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk48</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-48.html">Bekijk hoofdstuk 48</a>
+        </div>
+      </article>
+
+      <!-- KAART 49 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H49</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 49 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 49.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 49 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk49</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-49.html">Bekijk hoofdstuk 49</a>
+        </div>
+      </article>
+
+      <!-- KAART 50 -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon">H50</div>
+          <div class="card-title-group">
+            <h2 class="card-title">Hoofdstuk 50 – Titel volgt</h2>
+            <p class="card-subtitle">Techniek en toepassing voor driebanden systeem 50.</p>
+            <div class="card-badges">
+              <span class="badge badge-3c">Driebanden</span>
+              <span class="badge">Systeem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          Dit hoofdstuk behandelt systeem 50 met visuele uitleg en praktijkvoorbeelden. De looplijnen en richtpunten worden stap voor stap uitgelegd.
+        </div>
+        <div class="card-footer">
+          <div class="tags">
+            <span class="tag">#Hoofdstuk50</span>
+            <span class="tag">#Driebanden</span>
+          </div>
+          <a class="btn-detail" href="hoofdstukken-1-100/hoofdstuk-50.html">Bekijk hoofdstuk 50</a>
+        </div>
+      </article>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer" id="contact">
+      <span>© 2025 Diverse Biljartsystemen – beheer en administratie: Johan Sopamena.</span>
+      <span>Deze site fungeert als naslagwerk voor driebanden‑spelers die systematisch willen trainen.</span>
+    </footer>
+  </div>
+</body>
+</html>
